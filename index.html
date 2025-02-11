@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            text-align: center;
+        }
+        #days {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #time {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #motivation {
+            font-size: 1.5rem;
+            font-weight: bold;
+            max-width: 80vw;
+        }
+        #head{
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="head"><h1>JEE MAINS 2ND ATTEMPT COUNTDOWN</h1></header>
+    <div id="days">00 Days Remaining</div>
+    <div id="time">00:00:00 Remaining</div>
+    <div id="motivation">"
+"Remember that gut-wrenching disappointment? That feeling of failure when you saw your JEE result? That pain? Let it burn inside you. Because this time, youre not just trying—youre conquering. No more excuses. No more regrets. The next time you check your result, it will scream 95+ percentile, and nothing less. You either rise now or relive that failure. The choice is yours."
+<br>
+🔥 Now get up and make every second count! No looking back! 🚀
+    
+    </div>
+    <script>
+        function startCountdown() {
+            const targetDate = new Date('April 1, ' + new Date().getFullYear() + ' 00:00:00').getTime();
+            
+            function updateTimer() {
+                const now = new Date().getTime();
+                const timeRemaining = targetDate - now;
+                
+                if (timeRemaining < 0) {
+                    document.getElementById('days').textContent = "Countdown Over";
+                    document.getElementById('time').textContent = "00:00:00";
+                    localStorage.removeItem('countdownTarget');
+                    return;
+                }
+                
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = `${days} Days Remaining`;
+                document.getElementById('time').textContent = 
+                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} Remaining`;
+                
+                localStorage.setItem('countdownTarget', targetDate);
+                setTimeout(updateTimer, 1000);
+            }
+            
+            updateTimer();
+        }
+        
+        startCountdown();
+    </script>
+</body>
+</html>
